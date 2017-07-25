@@ -1,0 +1,25 @@
+<launch>
+
+  <node name="jetbot_msg_puller"  pkg="jetbot"  type="jetbot_msg_puller" output="screen">
+  <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>  
+  <param name="serial_baudrate"     type="int"    value="115200"/>
+  <param name="spin_rate"           type="int"    value="100"/>
+  </node>
+
+  <node name="jetbot_msg_pusher"  pkg="jetbot"  type="jetbot_msg_pusher" output="screen">
+  <param name="serial_port"         type="string" value="/dev/ttyUSB0"/>  
+  <param name="serial_baudrate"     type="int"    value="115200"/>
+  <param name="spin_rate"           type="int"    value="50"/>
+  </node>
+
+  <node name="jetbot_odo_pub"  pkg="jetbot"  type="jetbot_odo_pub" output="screen">
+  <param name="spin_rate"           type="int"    value="50"/>
+  </node>
+
+  <node name="jetbot_cmd_vel"  pkg="jetbot"  type="jetbot_cmd_vel" output="screen">
+  <param name="spin_rate"           type="int"    value="50"/>
+  </node>
+
+ 
+
+</launch>
