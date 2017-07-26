@@ -1,0 +1,7 @@
+int16 mouse_speed_x
+int16 mouse_speed_y
+int16 mouse_speed_z
+uint8 mouse_button_left
+uint8 mouse_button_right
+uint16 key
+uint16 res

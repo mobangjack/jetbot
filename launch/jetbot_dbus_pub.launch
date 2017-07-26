@@ -1,0 +1,8 @@
+<launch>
+
+  <node name="jetbot_dbus_pub"  pkg="jetbot"  type="jetbot_dbus_pub" output="screen">
+  <param name="spin_rate"           type="int"    value="20"/>
+  <remap from="jetbot_dbus_pub/dbus" to="jetbot_virtual_rc/dbus" />
+  </node>
+
+</launch>

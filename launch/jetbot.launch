@@ -18,8 +18,21 @@
 
   <node name="jetbot_cmd_vel"  pkg="jetbot"  type="jetbot_cmd_vel" output="screen">
   <param name="spin_rate"           type="int"    value="50"/>
+  <remap from="jetbot_cmd_vel/cmd_vel" to="/cmd_vel" />
   </node>
 
- 
+  <node pkg="tf" type="static_transform_publisher" name="uwb_tf_broadcaster" args="0.26 0 0.4 0 0 0 1 base_link uwb 100" />  
+
+  <node name="jetbot_uwb_pose"  pkg="jetbot"  type="jetbot_uwb_pose" output="screen">
+  <param name="spin_rate"           type="int"    value="50"/>
+  </node>
+
+  <node name="jetbot_relocator"  pkg="jetbot"  type="jetbot_relocator" output="screen">
+  <param name="spin_rate"           type="int"    value="10"/>
+  </node>
+
+  <node name="jetbot_virtual_rc"  pkg="jetbot"  type="jetbot_virtual_rc" output="screen">
+  <param name="spin_rate"           type="int"    value="50"/>
+  </node>
 
 </launch>

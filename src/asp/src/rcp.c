@@ -23,8 +23,8 @@ void Rcp_Enc(const Rcp_t* rcp, uint8_t* buf)
 	buf[2] = (rcp->ch[2] << 6) | (rcp->ch[1] >> 5);
 	buf[3] = rcp->ch[2];
 	buf[4] = (rcp->ch[3] << 1) | (rcp->ch[2] >> 10);
-	buf[5] = (rcp->sw[SW_IDX_R] << 6) |
-			 (rcp->sw[SW_IDX_L] << 4) |
+	buf[5] = (rcp->sw[SW_IDX_L] << 6) |
+			 (rcp->sw[SW_IDX_R] << 4) |
 			 (rcp->ch[3] >> 7);
 }
 

@@ -24,52 +24,49 @@
 #include <sstream>
 
 #include "asp.h"
-#include "uart.h"
 
-#include "jetbot/Bot.h"
-
-ros::Publisher* pubptr = NULL;
-jetbot::Bot bot;
-
-void velCallback(const geometry_msgs::Twist::ConstPtr& twist)
-{
-  if (pubptr == NULL) return;
-
-  bot.frame_id++;
-
-  bot.cbus.cv.x = -twist->linear.y * 1000;
-  bot.cbus.cv.y = twist->linear.x * 1000;
-  bot.cbus.cv.z = -twist->angular.z * 1000;
-  
-  pubptr->publish(bot);
-
-}
+#include "jetbot/DBus.h"
 
 int main(int argc, char **argv)
 {
   
-  ros::init(argc, argv, "jetbot_cmd_vel");
+  ros::init(argc, argv, "jetbot_dbus_pub");
 
-  int spin_rate = 50;
+  int spin_rate = 20;
   
   ros::NodeHandle np("~");
-  np.param<int>("spin_rate", spin_rate, 50); 
+  np.param<int>("spin_rate", spin_rate, 20); 
   
   ros::NodeHandle n;
 
-  ros::Subscriber vel_sub = n.subscribe<geometry_msgs::Twist>("jetbot_cmd_vel/cmd_vel", 100, velCallback); // Odometry feedback listenner
-  
-  ros::Publisher bot_pub = n.advertise<jetbot::Bot>("jetbot_msg_pusher/bot", 100); // Command advertiser
-
-  pubptr = &bot_pub;
+  ros::Publisher dbus_pub = n.advertise<jetbot::DBus>("jetbot_dbus_pub/dbus", 100);
    
   ros::Rate rate(spin_rate);
+
+  jetbot::DBus dbus;
+
+  dbus.rcp.ch1 = CH_MID;
+  dbus.rcp.ch2 = CH_MID;
+  dbus.rcp.ch3 = CH_MID;
+  dbus.rcp.ch4 = CH_MID;
+  dbus.rcp.sw1 = SW_MD; 
+  dbus.rcp.sw2 = SW_DN; // To obtain control privilege
+
+  dbus.hcp.mouse_speed_x = 0;
+  dbus.hcp.mouse_speed_y = 0;
+  dbus.hcp.mouse_speed_z = 0;
+  dbus.hcp.mouse_button_left = 0;
+  dbus.hcp.mouse_button_right = 0;
+  dbus.hcp.key = 0;
+  dbus.hcp.res = 0;
 
   while (ros::ok())
   {
 
     ros::spinOnce();
-  
+    
+    dbus_pub.publish(dbus);
+
     rate.sleep();
   }
 

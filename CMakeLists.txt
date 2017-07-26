@@ -19,6 +19,9 @@ add_message_files(
   Uwb.msg
   VRC.msg
   VHC.msg
+  Rcp.msg
+  Hcp.msg
+  DBus.msg
   VDBus.msg
   ZGyro.msg
 )
@@ -48,6 +51,19 @@ target_link_libraries(jetbot_cmd_vel ${catkin_LIBRARIES})
 
 add_executable(jetbot_odo_pub ${sourcefiles} src/jetbot_odo_pub.cpp)
 target_link_libraries(jetbot_odo_pub ${catkin_LIBRARIES})
+
+add_executable(jetbot_uwb_pose ${sourcefiles} src/jetbot_uwb_pose.cpp)
+target_link_libraries(jetbot_uwb_pose ${catkin_LIBRARIES})
+
+add_executable(jetbot_relocator ${sourcefiles} src/jetbot_relocator.cpp)
+target_link_libraries(jetbot_relocator ${catkin_LIBRARIES})
+
+add_executable(jetbot_virtual_rc ${sourcefiles} src/jetbot_virtual_rc.cpp)
+target_link_libraries(jetbot_virtual_rc ${catkin_LIBRARIES})
+
+add_executable(jetbot_dbus_pub ${sourcefiles} src/jetbot_dbus_pub.cpp)
+target_link_libraries(jetbot_dbus_pub ${catkin_LIBRARIES})
+
 
 
 

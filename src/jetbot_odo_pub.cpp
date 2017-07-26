@@ -111,6 +111,7 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
 
   ros::Subscriber bot_sub = n.subscribe<jetbot::Bot>("jetbot_msg_puller/bot", 100, botCallback); // Odometry listenner
+  
   ros::Publisher odom_pub = n.advertise<nav_msgs::Odometry>("odom", 100); // Built-in odom
 
   odo_pub = &odom_pub;
