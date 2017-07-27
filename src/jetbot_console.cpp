@@ -220,7 +220,7 @@ int main(int argc, char** argv)
     np.param<int>("spin_rate", spin_rate, 50); 
 
     ros::NodeHandle n;
-    ros::Publisher pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 100);
+    ros::Publisher pub = n.advertise<geometry_msgs::Twist>("cmd_vel", 1000);
 
     ros::Rate rate(spin_rate);
 

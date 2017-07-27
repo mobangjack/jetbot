@@ -148,10 +148,10 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-  ros::Subscriber bot_sub = n.subscribe<jetbot::Bot>("jetbot_msg_pusher/bot", 100, botCallback); // Command listenner
-  ros::Subscriber vrc_sub = n.subscribe<jetbot::VRC>("jetbot_msg_pusher/vrc", 100, vrcCallback);
-  ros::Subscriber vhc_sub = n.subscribe<jetbot::VHC>("jetbot_msg_pusher/vhc", 100, vhcCallback);
-  ros::Subscriber vdbus_sub = n.subscribe<jetbot::VDBus>("jetbot_msg_pusher/vdbus", 100, vdbusCallback);
+  ros::Subscriber bot_sub = n.subscribe<jetbot::Bot>("jetbot_msg_pusher/bot", 1000, botCallback); // Command listenner
+  ros::Subscriber vrc_sub = n.subscribe<jetbot::VRC>("jetbot_msg_pusher/vrc", 1000, vrcCallback);
+  ros::Subscriber vhc_sub = n.subscribe<jetbot::VHC>("jetbot_msg_pusher/vhc", 1000, vhcCallback);
+  ros::Subscriber vdbus_sub = n.subscribe<jetbot::VDBus>("jetbot_msg_pusher/vdbus", 1000, vdbusCallback);
 
   ros::Rate rate(spin_rate);
 

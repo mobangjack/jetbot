@@ -48,12 +48,12 @@ int main(int argc, char **argv)
   ros::init(argc, argv, "jetbot_vel_repub");
 
   int spin_rate = 50;
-  int desire_rate = 20;
+  int desire_rate = 50;
   
   
   ros::NodeHandle np("~");
   np.param<int>("spin_rate", spin_rate, 50);
-  np.param<int>("desire_rate", spin_rate, 20);
+  np.param<int>("desire_rate", spin_rate, 50);
 
   if (desire_rate < 1) desire_rate = 1;
 
@@ -61,9 +61,9 @@ int main(int argc, char **argv)
   
   ros::NodeHandle n;
 
-  ros::Subscriber vel_sub = n.subscribe<geometry_msgs::Twist>("jetbot_cmd_vel/cmd_vel", 100, velCallback);
+  ros::Subscriber vel_sub = n.subscribe<geometry_msgs::Twist>("jetbot_cmd_vel/cmd_vel", 1000, velCallback);
   
-  ros::Publisher vel_pub = n.advertise<geometry_msgs::Twist>("jetbot_vel_repub/cmd_vel", 100);
+  ros::Publisher vel_pub = n.advertise<geometry_msgs::Twist>("jetbot_vel_repub/cmd_vel", 1000);
 
 
   pubptr = &vel_pub;
@@ -81,6 +81,7 @@ int main(int argc, char **argv)
     if (timeLap > desire_period)
     {
       vel_pub.publish(twist);
+      lastPubTime = ros::Time::now();
     }
 
     rate.sleep();

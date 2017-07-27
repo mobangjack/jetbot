@@ -78,8 +78,8 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-  ros::Subscriber uwb_sub = n.subscribe<jetbot::Uwb>("jetbot_uwb", 100, uwbCallback); // Odometry listenner
-  ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("jetbot_uwb_pose", 100);
+  ros::Subscriber uwb_sub = n.subscribe<jetbot::Uwb>("jetbot_uwb", 1000, uwbCallback); // Odometry listenner
+  ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("jetbot_uwb_pose", 1000);
 
   pubptr = &pose_pub;
   

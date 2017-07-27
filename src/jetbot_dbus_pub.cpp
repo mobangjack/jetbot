@@ -39,7 +39,7 @@ int main(int argc, char **argv)
   
   ros::NodeHandle n;
 
-  ros::Publisher dbus_pub = n.advertise<jetbot::DBus>("jetbot_dbus_pub/dbus", 100);
+  ros::Publisher dbus_pub = n.advertise<jetbot::DBus>("jetbot_dbus_pub/dbus", 1000);
    
   ros::Rate rate(spin_rate);
 

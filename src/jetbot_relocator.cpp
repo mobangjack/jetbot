@@ -83,12 +83,12 @@ int main(int argc, char **argv)
 
   ros::NodeHandle n;
 
-  message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped> uwb_pose_sub(n, "jetbot_uwb_pose", 10);  
-  message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped> amcl_pose_sub(n, "amcl_pose", 10);
-  ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("initialpose", 10);
+  message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped> uwb_pose_sub(n, "jetbot_uwb_pose", 100);  
+  message_filters::Subscriber<geometry_msgs::PoseWithCovarianceStamped> amcl_pose_sub(n, "amcl_pose", 100);
+  ros::Publisher pose_pub = n.advertise<geometry_msgs::PoseWithCovarianceStamped>("initialpose", 100);
   pubptr = &pose_pub;
 
-  message_filters::TimeSynchronizer<geometry_msgs::PoseWithCovarianceStamped, geometry_msgs::PoseWithCovarianceStamped> sync(uwb_pose_sub, amcl_pose_sub, 10);  
+  message_filters::TimeSynchronizer<geometry_msgs::PoseWithCovarianceStamped, geometry_msgs::PoseWithCovarianceStamped> sync(uwb_pose_sub, amcl_pose_sub, 100);  
   sync.registerCallback(boost::bind(&callback, _1, _2));  
   
   ros::Rate rate(spin_rate);

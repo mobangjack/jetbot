@@ -56,9 +56,9 @@ int main(int argc, char **argv)
   
   ros::NodeHandle n;
 
-  ros::Subscriber vel_sub = n.subscribe<geometry_msgs::Twist>("jetbot_cmd_vel/cmd_vel", 100, velCallback);
+  ros::Subscriber vel_sub = n.subscribe<geometry_msgs::Twist>("jetbot_cmd_vel/cmd_vel", 1000, velCallback);
   
-  ros::Publisher bot_pub = n.advertise<jetbot::Bot>("jetbot_msg_pusher/bot", 100);
+  ros::Publisher bot_pub = n.advertise<jetbot::Bot>("jetbot_msg_pusher/bot", 1000);
 
   pubptr = &bot_pub;
    

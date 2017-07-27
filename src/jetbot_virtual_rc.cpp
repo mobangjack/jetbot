@@ -139,13 +139,13 @@ int main(int argc, char **argv)
   
   ros::NodeHandle n;
 
-  ros::Subscriber rcp_sub = n.subscribe<jetbot::Rcp>("jetbot_virtual_rc/rcp", 100, rcpCallback); 
-  ros::Subscriber hcp_sub = n.subscribe<jetbot::Hcp>("jetbot_virtual_rc/hcp", 100, hcpCallback); 
-  ros::Subscriber dbus_sub = n.subscribe<jetbot::DBus>("jetbot_virtual_rc/dbus", 100, dbusCallback); 
+  ros::Subscriber rcp_sub = n.subscribe<jetbot::Rcp>("jetbot_virtual_rc/rcp", 1000, rcpCallback); 
+  ros::Subscriber hcp_sub = n.subscribe<jetbot::Hcp>("jetbot_virtual_rc/hcp", 1000, hcpCallback); 
+  ros::Subscriber dbus_sub = n.subscribe<jetbot::DBus>("jetbot_virtual_rc/dbus", 1000, dbusCallback); 
   
-  ros::Publisher vrc_pub = n.advertise<jetbot::VDBus>("jetbot_msg_pusher/vrc", 100);
-  ros::Publisher vhc_pub = n.advertise<jetbot::VDBus>("jetbot_msg_pusher/vhc", 100);
-  ros::Publisher vdbus_pub = n.advertise<jetbot::VDBus>("jetbot_msg_pusher/vdbus", 100);
+  ros::Publisher vrc_pub = n.advertise<jetbot::VDBus>("jetbot_msg_pusher/vrc", 1000);
+  ros::Publisher vhc_pub = n.advertise<jetbot::VDBus>("jetbot_msg_pusher/vhc", 1000);
+  ros::Publisher vdbus_pub = n.advertise<jetbot::VDBus>("jetbot_msg_pusher/vdbus", 1000);
 
   vrc_pub_ptr = &vrc_pub;
   vhc_pub_ptr = &vhc_pub;

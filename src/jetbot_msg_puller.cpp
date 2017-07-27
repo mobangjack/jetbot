@@ -124,10 +124,10 @@ int main(int argc, char **argv)
   
   ros::NodeHandle n;
 
-  ros::Publisher bot_pub = n.advertise<jetbot::Bot>("jetbot_msg_puller/bot", 100); // Bot odo message feedback
-  ros::Publisher uwb_pub = n.advertise<jetbot::Uwb>("jetbot_msg_puller/uwb", 100); // UWB Locater
-  ros::Publisher zgyro_pub = n.advertise<jetbot::ZGyro>("jetbot_msg_puller/zgyro", 100); // ZGyro feedback
-  ros::Publisher vdbus_pub = n.advertise<jetbot::VDBus>("jetbot_msg_puller/vdbus", 100); // VDBus feedback
+  ros::Publisher bot_pub = n.advertise<jetbot::Bot>("jetbot_msg_puller/bot", 1000); // Bot odo message feedback
+  ros::Publisher uwb_pub = n.advertise<jetbot::Uwb>("jetbot_msg_puller/uwb", 1000); // UWB Locater
+  ros::Publisher zgyro_pub = n.advertise<jetbot::ZGyro>("jetbot_msg_puller/zgyro", 1000); // ZGyro feedback
+  ros::Publisher vdbus_pub = n.advertise<jetbot::VDBus>("jetbot_msg_puller/vdbus", 1000); // VDBus feedback
   
   ros::Rate rate(spin_rate);
 
