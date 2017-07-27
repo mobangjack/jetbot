@@ -21,8 +21,16 @@
   <remap from="jetbot_cmd_vel/cmd_vel" to="/cmd_vel" />
   </node>
 
+  <node name="jetbot_vel_repub"  pkg="jetbot"  type="jetbot_vel_repub" output="screen">
+  <param name="spin_rate"           type="int"    value="50"/>
+  <param name="desire_rate"           type="int"    value="20"/>
+  <remap from="jetbot_cmd_vel/cmd_vel" to="cmd_vel" />
+  <remap from="jetbot_vel_repub/cmd_vel" to="cmd_vel" />
+  </node>
+
 <!-- To save computation resource
   <node pkg="tf" type="static_transform_publisher" name="uwb_tf_broadcaster" args="0.26 0 0.4 0 0 0 1 base_link uwb 100" />  
+-->
 
   <node name="jetbot_uwb_pose"  pkg="jetbot"  type="jetbot_uwb_pose" output="screen">
   <param name="spin_rate"           type="int"    value="50"/>
@@ -35,6 +43,6 @@
   <node name="jetbot_virtual_rc"  pkg="jetbot"  type="jetbot_virtual_rc" output="screen">
   <param name="spin_rate"           type="int"    value="50"/>
   </node>
--->
+
 
 </launch>

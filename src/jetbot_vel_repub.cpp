@@ -25,50 +25,64 @@
 
 #include "asp.h"
 
-#include "jetbot/Bot.h"
+ros::Time lastPubTime;
 
 ros::Publisher* pubptr = NULL;
-jetbot::Bot bot;
+geometry_msgs::Twist twist;
 
-void velCallback(const geometry_msgs::Twist::ConstPtr& twist)
+void velCallback(const geometry_msgs::Twist::ConstPtr& twistPtr)
 {
   if (pubptr == NULL) return;
 
-  bot.frame_id++;
-
-  bot.cbus.cv.x = -twist->linear.y * 1000;
-  bot.cbus.cv.y = twist->linear.x * 1000;
-  bot.cbus.cv.z = -twist->angular.z * 1000;
+  twist.linear.x = -twistPtr->linear.y;
+  twist.linear.y = twistPtr->linear.x;
+  twist.angular.z = -twistPtr->angular.z;
   
-  pubptr->publish(bot);
-
+  //pubptr->publish(twist);
+  lastPubTime = ros::Time::now();
 }
 
 int main(int argc, char **argv)
 {
   
-  ros::init(argc, argv, "jetbot_cmd_vel");
+  ros::init(argc, argv, "jetbot_vel_repub");
 
   int spin_rate = 50;
+  int desire_rate = 20;
+  
   
   ros::NodeHandle np("~");
-  np.param<int>("spin_rate", spin_rate, 50); 
+  np.param<int>("spin_rate", spin_rate, 50);
+  np.param<int>("desire_rate", spin_rate, 20);
+
+  if (desire_rate < 1) desire_rate = 1;
+
+  double desire_period = 1.0 / desire_rate;
   
   ros::NodeHandle n;
 
   ros::Subscriber vel_sub = n.subscribe<geometry_msgs::Twist>("jetbot_cmd_vel/cmd_vel", 100, velCallback);
   
-  ros::Publisher bot_pub = n.advertise<jetbot::Bot>("jetbot_msg_pusher/bot", 100);
+  ros::Publisher vel_pub = n.advertise<geometry_msgs::Twist>("jetbot_vel_repub/cmd_vel", 100);
 
-  pubptr = &bot_pub;
+
+  pubptr = &vel_pub;
    
   ros::Rate rate(spin_rate);
+
+  double timeLap = 0;
 
   while (ros::ok())
   {
 
     ros::spinOnce();
-  
+
+    timeLap = (ros::Time::now() - lastPubTime).toSec();
+    if (timeLap > desire_period)
+    {
+      vel_pub.publish(twist);
+    }
+
     rate.sleep();
   }
 

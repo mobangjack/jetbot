@@ -1,0 +1,10 @@
+<launch>
+
+  <node name="jetbot_vel_repub"  pkg="jetbot"  type="jetbot_vel_repub" output="screen">
+  <param name="spin_rate"           type="int"    value="50"/>
+  <param name="desire_rate"           type="int"    value="20"/>
+  <remap from="jetbot_cmd_vel/cmd_vel" to="cmd_vel" />
+  <remap from="jetbot_vel_repub/cmd_vel" to="cmd_vel" />
+  </node>
+
+</launch>

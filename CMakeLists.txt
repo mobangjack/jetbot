@@ -49,6 +49,9 @@ target_link_libraries(jetbot_msg_pusher ${catkin_LIBRARIES})
 add_executable(jetbot_cmd_vel ${sourcefiles} src/jetbot_cmd_vel.cpp)
 target_link_libraries(jetbot_cmd_vel ${catkin_LIBRARIES})
 
+add_executable(jetbot_vel_repub ${sourcefiles} src/jetbot_vel_repub.cpp)
+target_link_libraries(jetbot_vel_repub ${catkin_LIBRARIES})
+
 add_executable(jetbot_odo_pub ${sourcefiles} src/jetbot_odo_pub.cpp)
 target_link_libraries(jetbot_odo_pub ${catkin_LIBRARIES})
 
