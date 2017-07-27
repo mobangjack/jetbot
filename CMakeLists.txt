@@ -64,6 +64,9 @@ target_link_libraries(jetbot_virtual_rc ${catkin_LIBRARIES})
 add_executable(jetbot_dbus_pub ${sourcefiles} src/jetbot_dbus_pub.cpp)
 target_link_libraries(jetbot_dbus_pub ${catkin_LIBRARIES})
 
+add_executable(jetbot_console ${sourcefiles} src/jetbot_console.cpp)
+target_link_libraries(jetbot_console ${catkin_LIBRARIES})
+
 
 
 
