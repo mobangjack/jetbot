@@ -34,8 +34,8 @@ void velCallback(const geometry_msgs::Twist::ConstPtr& twistPtr)
 {
   if (pubptr == NULL) return;
 
-  twist.linear.x = -twistPtr->linear.y;
-  twist.linear.y = twistPtr->linear.x;
+  twist.linear.x = -twistPtr->linear.x;
+  twist.linear.y = twistPtr->linear.y;
   twist.angular.z = -twistPtr->angular.z;
   
   //pubptr->publish(twist);
